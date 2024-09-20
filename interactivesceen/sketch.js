@@ -15,14 +15,16 @@ let circleMaximumRadius;
 let circleColor;
 let score = 0;
 let highScore;
-let backgroundImg;
+let lastCircleTime = 0;
+let circleInterval = 3000; // 3 seconds in milliseconds
+// let backgroundImg;
 
-function preload(){ 
-  backgroundImg = loadImage('background.png')
-}
+// function preload(){ 
+//   backgroundImg = loadImage('background.png')
+// }
 
 function setup() {
-  createCanvas(550, 400);
+  createCanvas(550, 550);
   colorMode(HSB);
   noStroke();
   ellipseMode(RADIUS);
@@ -30,9 +32,15 @@ function setup() {
 }
 
 function draw() {
-  // background(200);
-  image(backgroundImg, 0, 0, width, height);
-//CIRCLE SHRINKING STUFF
+  background(0);
+  // image(backgroundImg, 0, 0, width, height);
+
+  // Check if it's time to create a new circle
+  if (millis() - lastCircleTime > circleInterval) {
+    resetCircle(); // Reset the circle to a new position and color
+    lastCircleTime = millis(); // Update the last circle time
+  }
+// CIRCLE SHRINKING STUFF
     // If the circle had not shrunk completely
   if (circleRadius > 0) {
     // Draw the circle
@@ -46,6 +54,12 @@ function draw() {
     circleX += circleXVelocity;
     circleY += circleYVelocity;
 
+    if(circleX - circleRadius < 0 ||circleX + circleRadius > width ){
+      circleXVelocity *= -1;
+    }
+    if(circleY - circleRadius< 0 || circleY + circleRadius > width){
+      circleYVelocity *= -1;
+    }
 // SHOW THE SCORE
     textAlign(RIGHT, TOP);
     fill(220);
@@ -60,12 +74,11 @@ function draw() {
 function startGame() {
   // Reset the score to 0
   score = 0;
-  circleXVelocity = 0.5;  
-  circleYVelocity = 0.5; 
+
 
   //set the direction to be random 
-  if (random() > 0.5) circleXVelocity *= -2;  
-  if (random() > 0.5) circleYVelocity *= -3;
+  if (random() > 0.5) circleXVelocity *= -6;  
+  if (random() > 0.5) circleYVelocity *= -6;
   // Start circle point
   circleMaximumRadius = min(height / 6, width / 6);
   resetCircle();
@@ -76,7 +89,7 @@ function endGame() {
   noLoop();
 
   textAlign(CENTER, CENTER);
-  fill(250);
+  fill(200);
   let startText = `Bubble pop
   Pop the bubble before it goes too far awy
   Score: ${score}
@@ -88,10 +101,10 @@ function endGame() {
 function resetCircle() {
   // Start with the circle's radius at its maximum value
   circleRadius = circleMaximumRadius;
-  circleX = width / 2;
-  circleY = height / 1.7 + 70;
-    circleXVelocity = random([-1, 1]) * 0.5; // Randomly choose between -0.5 and 0.5
-  circleYVelocity = random([-1, 1]) * 0.5; // Randomly choose between -0.5 and 0.5
+  circleX = width/2;
+  circleY = height/1.3;
+    circleXVelocity = random([-1, 1]) * 1; // Randomly choose between -0.5 and 0.5
+  circleYVelocity = random([-1, 1]) * 1; // Randomly choose between -0.5 and 0.5
   circleColor = color(random(240, 360), random(40, 80), random(50, 90));
 }
 
