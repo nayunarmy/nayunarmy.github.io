@@ -24,7 +24,7 @@ let shrinkSpeed = 0.1;
 // }
 
 function setup() {
-  createCanvas(550, 400);
+  createCanvas(550, 550);
   colorMode(HSB);
   noStroke();
   ellipseMode(RADIUS);
@@ -35,6 +35,7 @@ function draw() {
   background(0);
   // image(backgroundImg, 0, 0, width, height);
 //CIRCLE SHRINKING STUFF
+
     // If the circle had not shrunk completely
   if (circleRadius > 0) {
     // Draw the circle
@@ -57,7 +58,6 @@ function draw() {
     if (circleY - circleRadius <= 0 || circleY + circleRadius >= height) {
       circleYVelocity *= -1;  // Reverse vertical direction
     }
-
 // SHOW THE SCORE
     textAlign(RIGHT, TOP);
     fill(220);
@@ -74,8 +74,8 @@ function startGame() {
   score = 0;
 
   //set the direction to be random 
-  if (random() > 0.5) circleXVelocity *= -2;  
-  if (random() > 0.5) circleYVelocity *= -3;
+  if (random() > 0.5) circleXVelocity *= -6;  
+  if (random() > 0.5) circleYVelocity *= -6;
   // Start circle point
   circleMaxRadius = min(height / 6, width / 6);
   resetCircle();
@@ -86,7 +86,9 @@ function endGame() {
   noLoop();
 
   textAlign(CENTER, CENTER);
+
   fill(225);
+
   let startText = `Bubble pop
   Pop the bubble before it goes too far awy
   Score: ${score}
