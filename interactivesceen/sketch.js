@@ -36,10 +36,10 @@ function draw() {
   // image(backgroundImg, 0, 0, width, height);
 
   // Check if it's time to create a new circle
-  if (millis() - lastCircleTime > circleInterval) {
-    resetCircle(); // Reset the circle to a new position and color
-    lastCircleTime = millis(); // Update the last circle time
-  }
+  // if (millis() - lastCircleTime > circleInterval) {
+  //   resetCircle(); // Reset the circle to a new position and color
+  //   lastCircleTime = millis(); // Update the last circle time
+  // }
 // CIRCLE SHRINKING STUFF
     // If the circle had not shrunk completely
   if (circleRadius > 0) {
@@ -103,8 +103,8 @@ function resetCircle() {
   circleRadius = circleMaximumRadius;
   circleX = width/2;
   circleY = height/1.3;
-    circleXVelocity = random([-1, 1]) * 1; // Randomly choose between -0.5 and 0.5
-  circleYVelocity = random([-1, 1]) * 1; // Randomly choose between -0.5 and 0.5
+    circleXVelocity = random([-1, 1]) * 3.5; // Randomly choose between -0.5 and 0.5
+  circleYVelocity = random([-1, 1]) * 3.5; // Randomly choose between -0.5 and 0.5
   circleColor = color(random(240, 360), random(40, 80), random(50, 90));
 }
 
