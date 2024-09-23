@@ -17,14 +17,14 @@ let score = 0;
 let highScore;
 let circleSpeed = 2;
 let shrinkSpeed = 0.1;
-// let backgroundImg;
+let backgroundImg;
 
-// function preload(){ 
-//   backgroundImg = loadImage('background.png')
-// }
+function preload(){ 
+  backgroundImg = loadImage('background.jpg')
+}
 
 function setup() {
-  createCanvas(550, 550);
+  createCanvas(700, 550);
   colorMode(HSB);
   noStroke();
   ellipseMode(RADIUS);
@@ -32,16 +32,19 @@ function setup() {
  }
 
 function draw() {
-  background(0);
-  // image(backgroundImg, 0, 0, width, height);
-//CIRCLE SHRINKING STUFF
+  // background(0);
+  image(backgroundImg, 0, 0, width, height);
+  mainStuff();
+}
 
+function mainStuff(){
 
   // Check if it's time to create a new circle
   // if (millis() - lastCircleTime > circleInterval) {
   //   resetCircle(); // Reset the circle to a new position and color
   //   lastCircleTime = millis(); // Update the last circle time
   // }
+
 // CIRCLE SHRINKING STUFF
 
     // If the circle had not shrunk completely
