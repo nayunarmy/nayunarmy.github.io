@@ -15,24 +15,22 @@ let circleMaxRadius;
 let circleColor;
 let score = 0;
 let highScore;
-let circleSpeed = 2;
-let shrinkSpeed = 0.1;
+let circleSpeed = 1.7;
+let shrinkSpeed = 0.2;
 let backgroundImg;
 
 function preload(){ 
-  backgroundImg = loadImage('background.jpg')
+  backgroundImg = loadImage("background.jpg");
 }
 
 function setup() {
   createCanvas(700, 550);
-  colorMode(HSB);
-  noStroke();
+  colorMode(RGB);
   ellipseMode(RADIUS);
   textSize(36);
- }
+}
 
 function draw() {
-  // background(0);
   image(backgroundImg, 0, 0, width, height);
   mainStuff();
 }
@@ -45,9 +43,9 @@ function mainStuff(){
   //   lastCircleTime = millis(); // Update the last circle time
   // }
 
-// CIRCLE SHRINKING STUFF
+  // CIRCLE SHRINKING STUFF
 
-    // If the circle had not shrunk completely
+  // If the circle had not shrunk completely
   if (circleRadius > 0) {
     // Draw the circle
     fill(circleColor);
@@ -55,11 +53,11 @@ function mainStuff(){
     // Shrink it
     circleRadius -= shrinkSpeed;
     
-//CIRCLE MOVING
+    //CIRCLE MOVING
     circleX += circleXVelocity;
     circleY += circleYVelocity;
 
-// BOUNCE LOGIC
+    // BOUNCE LOGIC
     // Check if the circle hits the left or right edge
     if (circleX - circleRadius <= 0 || circleX + circleRadius >= width) {
       circleXVelocity *= -1;  // Reverse horizontal direction
@@ -69,12 +67,12 @@ function mainStuff(){
     if (circleY - circleRadius <= 0 || circleY + circleRadius >= height) {
       circleYVelocity *= -1;  // Reverse vertical direction
     }
-// SHOW THE SCORE
+    // SHOW THE SCORE
     textAlign(RIGHT, TOP);
     fill(220);
     text(score, width - 20, 20);
-    describeElement('Score', `Text with current score: ${score}`);
-  } else {
+  }
+  else {
     // Otherwise show the start/end screen
     endGame();
   }
@@ -85,8 +83,12 @@ function startGame() {
   score = 0;
 
   //set the direction to be random 
-  if (random() > 0.5) circleXVelocity *= -6;  
-  if (random() > 0.5) circleYVelocity *= -6;
+  if (random() > 0.5) {
+    circleXVelocity *= -6;
+  }  
+  if (random() > 0.5) {
+    circleYVelocity *= -6;
+  }
   // Start circle point
   circleMaxRadius = min(height / 6, width / 6);
   resetCircle();
@@ -101,11 +103,10 @@ function endGame() {
   fill(225);
 
   let startText = `Bubble pop
-  Pop the bubble before it goes too far awy
+  Pop the bubble before it goes too far away
   Score: ${score}
   Click to play`;
   text(startText, 0, 0, width, height);
-  describeElement('Start text', `Text reading, "${startText}"`);
 }
 
 function resetCircle() {
@@ -115,8 +116,8 @@ function resetCircle() {
   circleY = height / 1.7 + 70;
   circleXVelocity = random([-1, 1]) * circleSpeed;
   circleYVelocity = random([-1, 1]) * circleSpeed;
-
-  circleColor = color(random(240, 360), random(40, 80), random(50, 90));
+  stroke(225);
+  circleColor = color(173, 216, 230, 200);
 }
 
 function mousePressed() {
@@ -133,7 +134,8 @@ function mousePressed() {
 
       score += 1;
     }
-  } else {
+  }
+  else {
     startGame();
     loop();
   }
