@@ -15,16 +15,16 @@ let circleMaxRadius;
 let circleColor;
 let score = 0;
 let highScore;
-let circleSpeed = 1.7;
-let shrinkSpeed = 0.2;
+let circleSpeed = 1.3;
+let shrinkSpeed = 0.20;
 let backgroundImg;
 
 function preload(){ 
-  backgroundImg = loadImage("background.jpg");
+  backgroundImg = loadImage("background.PNG");
 }
 
 function setup() {
-  createCanvas(700, 550);
+  createCanvas(700, 500);
   colorMode(RGB);
   ellipseMode(RADIUS);
   textSize(36);
@@ -58,22 +58,23 @@ function mainStuff(){
     circleY += circleYVelocity;
 
     // BOUNCE LOGIC
-    // Check if the circle hits the left or right edge
+    //left or right edge
     if (circleX - circleRadius <= 0 || circleX + circleRadius >= width) {
-      circleXVelocity *= -1;  // Reverse horizontal direction
+      circleXVelocity *= -1;  // Reverse 
+    }
+    //top or bottom edge
+    if (circleY - circleRadius <= 0 || circleY + circleRadius >= height) {
+      circleYVelocity *= -1;  // Reverse 
     }
 
-    // Check if the circle hits the top or bottom edge
-    if (circleY - circleRadius <= 0 || circleY + circleRadius >= height) {
-      circleYVelocity *= -1;  // Reverse vertical direction
-    }
     // SHOW THE SCORE
     textAlign(RIGHT, TOP);
-    fill(220);
+    fill(225);
     text(score, width - 20, 20);
   }
+
+
   else {
-    // Otherwise show the start/end screen
     endGame();
   }
 }
@@ -90,7 +91,7 @@ function startGame() {
     circleYVelocity *= -6;
   }
   // Start circle point
-  circleMaxRadius = min(height / 6, width / 6);
+  circleMaxRadius = min(height / 9.5, width / 9.5);
   resetCircle();
 }
 
@@ -106,14 +107,14 @@ function endGame() {
   Pop the bubble before it goes too far away
   Score: ${score}
   Click to play`;
-  text(startText, 0, 0, width, height);
+  text(startText, 0, -90, width, height);
 }
 
 function resetCircle() {
   // Start with the circle's radius at its maximum value
   circleRadius = circleMaxRadius;
   circleX = width / 2;
-  circleY = height / 1.7 + 70;
+  circleY = height / 1.3;
   circleXVelocity = random([-1, 1]) * circleSpeed;
   circleYVelocity = random([-1, 1]) * circleSpeed;
   stroke(225);
