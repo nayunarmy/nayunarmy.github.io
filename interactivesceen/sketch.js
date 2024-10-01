@@ -3,7 +3,7 @@
 // 17sep, 2024
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// - i used the $ sign to display my score varable , so that it updates on its own.
 
 
 let circleX;
@@ -73,7 +73,6 @@ function mainStuff(){
     text(score, width - 20, 20);
   }
 
-
   else {
     endGame();
   }
@@ -100,14 +99,14 @@ function endGame() {
   noLoop();
 
   textAlign(CENTER, CENTER);
-
   fill(225);
-
+  // Strat Text
   let startText = `Bubble pop
   Pop the bubble before it goes too far away
   Score: ${score}
   Click to play`;
-  text(startText, 0, -90, width, height);
+  text(startText, 0, -90, width, height); 
+
 }
 
 function resetCircle() {
