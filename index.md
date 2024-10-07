@@ -6,6 +6,7 @@
 - [Trafic light](traffic-light)
 - [Generative art](art)
 - [perlin noise ball](perlin)
+- [terrane generation](terrain)
   
 ## Projects
 -[interactive sceen](interactivesceen)
