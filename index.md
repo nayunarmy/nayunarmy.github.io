@@ -9,5 +9,6 @@
 - [terrane generation](terrain)
   
 ## Projects
--[interactive sceen](interactivesceen)
+- [interactive sceen](interactivesceen)
+- [Arrays and object Notation](array-object)
 
