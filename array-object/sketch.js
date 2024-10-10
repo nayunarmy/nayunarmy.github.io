@@ -1,9 +1,16 @@
-// Budget tracker
+// Tic-Tac-Toe
 // Navya Sauhta
 // 21 oct 2024
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
+
+let board = [
+  ["", "", ""],
+  ["", "", ""],
+  ["", "", ""]
+];
+let currentPlayer = "X";
 
 
 function setup() {
@@ -13,6 +20,9 @@ function setup() {
 function draw() {
   background(220);
 }
+function TicTacToe(){
+
+}
 
 
   
@@ -21,4 +31,5 @@ function draw() {
   
 
   
+
 

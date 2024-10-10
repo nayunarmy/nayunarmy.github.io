@@ -7,6 +7,7 @@
 - [Generative art](art)
 - [perlin noise ball](perlin)
 - [terrane generation](terrain)
+- [Bubble object demo](bubble)
   
 ## Projects
 - [interactive sceen](interactivesceen)
