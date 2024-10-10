@@ -1,4 +1,4 @@
-// Project Title
+// Budget tracker
 // Navya Sauhta
 // 21 oct 2024
 //
@@ -13,3 +13,12 @@ function setup() {
 function draw() {
   background(220);
 }
+
+
+  
+
+  
+  
+
+  
+
