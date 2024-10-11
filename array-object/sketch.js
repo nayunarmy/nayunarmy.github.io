@@ -15,22 +15,27 @@
 
 // Setup function to initialize the game
 function setup() {
-  board = [
-      ["", "", ""],
-      ["", "", ""],
-      ["", "", ""]
-  ];
- 
-  draw(); // Draw the initial empty board
-}
+
+  theBoard = {'7': ' ' , '8': ' ' , '9': ' ' ,
+    '4': ' ' , '5': ' ' , '6': ' ' ,
+    '1': ' ' , '2': ' ' , '3': ' ' }
+  }
+    
+
 
 // Draw function to output the board in the console (for now)
 function draw() {
-  console.clear(); // Clear the console for better readability
+
+
+
+deff printBoard(board):
+print(board['7'] + '|' + board['8'] + '|' + board['9'])
+print('-+-+-')
+print(board['4'] + '|' + board['5'] + '|' + board['6'])
+print('-+-+-')
+print(board['1'] + '|' + board['2'] + '|' + board['3'])
+  draw(); // Draw the initial empty board
 }
-
-
-
   
 
   
