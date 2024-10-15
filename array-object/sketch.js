@@ -5,7 +5,8 @@
 // Extra for Experts:
 // - use of buttons function in p5js
 
-
+let shoppingList = [];
+let inputName, inputQuantity, inputPrice, addButton;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -22,13 +23,42 @@ function setup() {
   inputPrice = createInput();
   inputPrice.position(280, 40);
   inputPrice.attribute('placeholder', 'Price');
-  
+
+
+  // creating an add mouseButton
+  addButton = createButton('Add Item');
+  addButton.position(420, 40);
+  addButton.mousePressed(chukLastItem);
+
+
 
 }
 
 function draw() {
   background(220);
   displayShoppingList();
+}
+
+function chukLastItem(){
+  let name = inputName.value();
+  let quantity = inputQuantity.value();
+  let price = inputPrice.value();
+
+  if (name && quantity && price){
+    let item = {
+      name: name,
+      guantity: quantity,
+      price: price,
+    };
+    shoppingList.push(item);
+    console.log('${name} added to the list.');
+    inputName.value('');
+    inputName.value('');
+    inputName.value('');
+  }
+  else{
+    console.log("Please fill out all the feilds!");
+  }
 }
 
 // Function to display the shopping list
