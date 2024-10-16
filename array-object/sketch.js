@@ -25,12 +25,15 @@ function setup() {
   inputPrice.attribute('placeholder', 'Price');
 
 
-  // creating an add mouseButton
+  // creating an add button
   addButton = createButton('Add Item');
   addButton.position(420, 40);
-  addButton.mousePressed(chukLastItem);
+  addButton.mousePressed(addItem);
 
-
+  // creating a remove button
+  removeButton = createButton('remove last item');
+  removeButton.position(500, 40);
+  removeButton.mousePressed(chuckLastItem);
 
 }
 
@@ -39,7 +42,18 @@ function draw() {
   displayShoppingList();
 }
 
-function chukLastItem(){
+
+function chuckLastItem(){
+  if (shoppingList.length > 0){
+    let removeItem = shoppingList.pop();
+    console.log(`${removeItem.name} removed from the list`);
+  }
+  else{
+    console.log("The shopping list is empty.");
+  }
+}
+
+function addItem(){
   let name = inputName.value();
   let quantity = inputQuantity.value();
   let price = inputPrice.value();
@@ -47,14 +61,14 @@ function chukLastItem(){
   if (name && quantity && price){
     let item = {
       name: name,
-      guantity: quantity,
+      quantity: quantity,
       price: price,
     };
     shoppingList.push(item);
-    console.log('${name} added to the list.');
+    console.log(`${name} added to the list.`);
     inputName.value('');
-    inputName.value('');
-    inputName.value('');
+    inputQuantity.value('');
+    inputPrice.value('');
   }
   else{
     console.log("Please fill out all the feilds!");
@@ -66,6 +80,12 @@ function displayShoppingList() {
   textSize(16);
   fill(0);
   text("Shopping List:", 20, 100);
+
+  //loop for adding it on the display list
+  for(let i = 0; i < shoppingList.length; i++){
+    let item = shoppingList[i];
+    text(`${i + 1}. ${item.name} - Quantity: ${item.quantity}, Price: $${item.price}` , 20, 130 + i * 30);
+  }
 }
 
 
