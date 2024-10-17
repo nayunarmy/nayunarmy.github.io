@@ -7,11 +7,12 @@
 
 let shoppingList = [];
 let inputName, inputQuantity, inputPrice, addButton;
+let listPage = 'start';
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   
-  // Create input fields for item name, quantity, and price
+  // input fields 
   inputName = createInput();
   inputName.position(20, 40);
   inputName.attribute('placeholder', 'Item Name');
@@ -25,15 +26,20 @@ function setup() {
   inputPrice.attribute('placeholder', 'Price');
 
 
-  // creating an add button
+  // add button
   addButton = createButton('Add Item');
   addButton.position(420, 40);
   addButton.mousePressed(addItem);
 
-  // creating a remove button
+  // remove button
   removeButton = createButton('remove last item');
   removeButton.position(500, 40);
   removeButton.mousePressed(chuckLastItem);
+
+  // start button
+  startButton = createButton('Start Shopping list');
+  startButton.position(width / 2 - 80, height / 2);
+  startButton.mousePressed(startShoppinglist)
 
 }
 
@@ -42,6 +48,14 @@ function draw() {
   displayShoppingList();
 }
 
+
+function startShoppingList(){
+  listPage = 'shoppingList';
+
+
+  //hiding the other button
+  startButton.hide();
+}
 
 function chuckLastItem(){
   if (shoppingList.length > 0){
