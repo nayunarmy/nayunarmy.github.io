@@ -122,12 +122,13 @@ function chuckLastItem(){
 function displayShoppingList() {
   textSize(20);
   fill(0);
-  text("Shopping List:", 85, 100);
+  text("Shopping List:", 95, 100);
 
   //loop for adding stuff to the list
   for(let i = 0; i < shoppingList.length; i++){
     let item = shoppingList[i];
-    text(`${i + 1}. ${item.name} - Quantity: ${item.quantity}, Price: $${item.price}` , 20, 130 + i * 30);
+    textAlign(LEFT, CENTER);
+    text(`${i + 1}. ${item.name} - Quantity: ${item.quantity}, Price: $${item.price}` , 30, 130 + i * 30);
   }
 }
 
