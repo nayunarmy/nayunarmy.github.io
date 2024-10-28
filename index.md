@@ -11,8 +11,9 @@
 - [sounds effects demo](sound-fx)
 - [Translate and Rotate](rotate)
 - [grid demo](grid)
-- [game pf life] (new life)
+- [game of life] (newlife)
 - [rectangle grid](rectanglegrid)
+- []
   
 ## Projects
 - [interactive sceen](interactivesceen)
