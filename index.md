@@ -13,7 +13,8 @@
 - [grid demo](grid)
 - [game of life] (newlife)
 - [rectangle grid](rectanglegrid)
-- []
+- [moving character game demo](movingcharacter)
+- [grid-based game](gridgame)
   
 ## Projects
 - [interactive sceen](interactivesceen)
