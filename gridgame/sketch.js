@@ -15,15 +15,15 @@ function setup() {
 
   //making buttons
   startButton = createButton('start');
-  startButton.position(width / 2 - 80, height / 2);
+  startButton.position(width / 2 - 50, height / 2);
   startButton.mouseClicked(optionPage);
 
   optionButton1 = createButton('gen-z slang');
-  optionButton1.position(width / 2 - 80, height / 2);
+  optionButton1.position(width / 2 - 50, height / 2);
   optionButton1.mousePressed(genzWordle);
 
   optionButton2 = createButton('gen-a slang');
-  optionButton2.position(width / 2 - 80, height / 1.8 );
+  optionButton2.position(width / 2 - 50, height / 1.8 );
   optionButton2.mousePressed(genaWordle);
 }
 
@@ -35,10 +35,13 @@ function draw() {
 function whichPage(){
   if (listPage === 'start'){
     //opening page
-    textSize(32);
-    fill(0);
+    textSize(70);
+    fill(60);
     textAlign(CENTER, CENTER);
-    text('welcome to wordle ', width / 2, height / 2 - 50);
+    text('Welcome to wordle ', width / 2, height / 2 - 50);
+    optionButton1.hide();
+    optionButton2.hide();
+    startButton.show();
   }
   else if ( listPage === 'genzWorld'){
     genzWordle();
@@ -54,8 +57,8 @@ function whichPage(){
   }
   else if ( listPage === 'optionPage'){
     optionPage();
-    optionButton1.hide();
-    optionButton2.hide();
+    optionButton1.show();
+    optionButton2.show();
     startButton.hide();
   }
 }
@@ -63,10 +66,10 @@ function whichPage(){
 function optionPage(){
   listPage = 'optionPage';
   //opening page
-  textSize(32);
+  textSize(50);
   fill(0);
   textAlign(CENTER, CENTER);
-  text('welcome to wordle ', width / 2, height / 2 - 50);
+  text('Choose your option', width / 2, height / 2 - 50);
 
 }
 
