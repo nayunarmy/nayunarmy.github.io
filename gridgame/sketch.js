@@ -1,98 +1,153 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// Wordle Game with Grid Layout
 
 let boardSize = 400;
-let cellSize = boardSize / 7;
+let cellSize = boardSize / 5; // 5 columns for a 5-letter word
 let listPage = 'start';
-let startButton;
+let startButton, optionButton1, optionButton2, inputField;
+let targetWord = ""; // Target word for the game
+let guesses = []; // Array to store guesses
+let maxAttempts = 6; // Maximum number of attempts
+let currentAttempt = 0; // Track the current attempt
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  //making buttons
-  startButton = createButton('start');
+  // Initialize buttons
+  startButton = createButton('Start');
   startButton.position(width / 2 - 50, height / 2);
   startButton.mouseClicked(optionPage);
 
-  optionButton1 = createButton('gen-z slang');
-  optionButton1.position(width / 2 - 50, height / 2);
-  optionButton1.mousePressed(genzWordle);
+  optionButton1 = createButton('Gen Z Slang');
+  optionButton1.position(width / 2 - 50, height / 2 + 50);
+  optionButton1.mouseClicked(() => startGame("GenZ"));
 
-  optionButton2 = createButton('gen-a slang');
-  optionButton2.position(width / 2 - 50, height / 1.8 );
-  optionButton2.mousePressed(genaWordle);
+  optionButton2 = createButton('Gen A Slang');
+  optionButton2.position(width / 2 - 50, height / 2 + 100);
+  optionButton2.mouseClicked(() => startGame("GenA"));
+
+  // Input for guesses
+  inputField = createInput();
+  inputField.position(width / 2 - 50, height - 100);
+  inputField.size(100);
+  inputField.hide();
+  inputField.changed(handleGuess);
 }
 
 function draw() {
   background(220);
-  whichPage();
+  displayPage();
 }
 
-function whichPage(){
-  if (listPage === 'start'){
-    //opening page
-    textSize(70);
-    fill(60);
-    textAlign(CENTER, CENTER);
-    text('Welcome to wordle ', width / 2, height / 2 - 50);
-    optionButton1.hide();
-    optionButton2.hide();
-    startButton.show();
-  }
-  else if ( listPage === 'genzWorld'){
-    genzWordle();
-    optionButton1.hide();
-    optionButton2.hide();
-    startButton.hide();
-  }
-  else if ( listPage === 'genaWordle'){
-    genaWordle();
-    optionButton1.hide();
-    optionButton2.hide();
-    startButton.hide();
-  }
-  else if ( listPage === 'optionPage'){
-    optionPage();
-    optionButton1.show();
-    optionButton2.show();
-    startButton.hide();
+function displayPage() {
+  if (listPage === 'start') {
+    showStartPage();
+  } 
+  else if (listPage === 'optionPage') {
+    showOptionPage();
+    
+  } 
+  else if (listPage === 'game') {
+    drawGrid();
+    inputField.show();
   }
 }
 
-function optionPage(){
-  listPage = 'optionPage';
-  //opening page
+function showStartPage() {
   textSize(50);
-  fill(0);
   textAlign(CENTER, CENTER);
-  text('Choose your option', width / 2, height / 2 - 50);
+  text('Welcome to Wordle', width / 2, height / 2 - 50);
 
+  startButton.show();
+  optionButton1.hide();
+  optionButton2.hide();
+  inputField.hide();
 }
 
-function genaWordle(){
-  listPage = 'genaWordle';
-  fill(255);
-  for (let i = 0; i < 7; i++) {
-    for (let j = 0; j < 7; j++) {
-      rect(i * cellSize, j * cellSize, cellSize, cellSize);
+function showOptionPage() {
+  textSize(50);
+  textAlign(CENTER, CENTER);
+  text('Choose your option', width / 2, height / 2 - 100);
+
+  startButton.hide();
+  optionButton1.show();
+  optionButton2.show();
+  inputField.hide();
+}
+
+function optionPage() {
+  listPage = 'optionPage';
+}
+
+function startGame(category) {
+  listPage = 'game';
+  guesses = []; // Reset guesses
+  currentAttempt = 0;
+
+  // Assign target word based on chosen category
+  targetWord = category === "GenZ" ? "YEETS" : "COOLY"; // Example words
+  
+  inputField.value("");
+  inputField.show();
+}
+
+function handleGuess() {
+  let guess = inputField.value().toUpperCase();
+  
+  // Only proceed if guess is the correct length
+  if (guess.length === targetWord.length && currentAttempt < maxAttempts) {
+    guesses.push(checkGuess(guess, targetWord));
+    currentAttempt++;
+    inputField.value(""); // Clear input
+
+    // Check for win condition
+    if (guess === targetWord) {
+      alert("You win!");
+      resetGame();
+    } else if (currentAttempt === maxAttempts) {
+      alert("Game over! The word was: " + targetWord);
+      resetGame();
     }
   }
 }
 
-function genzWordle(){
-  listPage = 'genzWorld';
-  fill(255);
-  for (let i = 0; i < 7; i++) {
-    for (let j = 0; j < 7; j++) {
-      rect(i * cellSize, j * cellSize, cellSize, cellSize);
+function checkGuess(guess, target) {
+  let result = [];
+  for (let i = 0; i < guess.length; i++) {
+    if (guess[i] === target[i]) {
+      result.push({letter: guess[i], color: 'green'});
+    } else if (target.includes(guess[i])) {
+      result.push({letter: guess[i], color: 'yellow'});
+    } else {
+      result.push({letter: guess[i], color: 'gray'});
     }
   }
-
+  return result;
 }
 
+function resetGame() {
+  guesses = [];
+  currentAttempt = 0;
+  listPage = 'optionPage';
+}
 
-
+function drawGrid() {
+  textSize(32);
+  textAlign(CENTER, CENTER);
+  for (let i = 0; i < maxAttempts; i++) {
+    for (let j = 0; j < targetWord.length; j++) {
+      let x = width / 2 - boardSize / 2 + j * cellSize;
+      let y = height / 2 - boardSize / 2 + i * cellSize;
+      
+      // Draw cells based on guess results
+      if (i < guesses.length) {
+        fill(guesses[i][j].color);
+        rect(x, y, cellSize, cellSize);
+        fill(0);
+        text(guesses[i][j].letter, x + cellSize / 2, y + cellSize / 2);
+      } else {
+        fill(255);
+        rect(x, y, cellSize, cellSize);
+      }
+    }
+  }
+}
