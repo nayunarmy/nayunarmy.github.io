@@ -9,6 +9,11 @@ let guesses = []; // Array to store guesses
 let maxAttempts = 6; // Maximum number of attempts
 let currentAttempt = 0; // Track the current attempt
 
+function preload(){
+  genzWordList = 
+  genaWordList = 
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -84,10 +89,12 @@ function startGame(category) {
   currentAttempt = 0;
 
   // Assign target word based on chosen category
-  targetWord = category === "GenZ" ? "YEETS" : "COOLY"; // Example words
+  targetWord = category === "GenZ" ? "YEETS": "COOLY"; // Example words
   
   inputField.value("");
   inputField.show();
+  optionButton1.hide();
+  optionButton2.hide();
 }
 
 function handleGuess() {
@@ -103,7 +110,8 @@ function handleGuess() {
     if (guess === targetWord) {
       alert("You win!");
       resetGame();
-    } else if (currentAttempt === maxAttempts) {
+    } 
+    else if (currentAttempt === maxAttempts) {
       alert("Game over! The word was: " + targetWord);
       resetGame();
     }
@@ -115,9 +123,11 @@ function checkGuess(guess, target) {
   for (let i = 0; i < guess.length; i++) {
     if (guess[i] === target[i]) {
       result.push({letter: guess[i], color: 'green'});
-    } else if (target.includes(guess[i])) {
+    } 
+    else if (target.includes(guess[i])) {
       result.push({letter: guess[i], color: 'yellow'});
-    } else {
+    } 
+    else {
       result.push({letter: guess[i], color: 'gray'});
     }
   }
@@ -135,8 +145,8 @@ function drawGrid() {
   textAlign(CENTER, CENTER);
   for (let i = 0; i < maxAttempts; i++) {
     for (let j = 0; j < targetWord.length; j++) {
-      let x = width / 2 - boardSize / 2 + j * cellSize;
-      let y = height / 2 - boardSize / 2 + i * cellSize;
+      let x = width / 1.85 - boardSize / 1.5 + j * cellSize;
+      let y = height / 2 - boardSize / 1.5 + i * cellSize;
       
       // Draw cells based on guess results
       if (i < guesses.length) {
@@ -144,7 +154,8 @@ function drawGrid() {
         rect(x, y, cellSize, cellSize);
         fill(0);
         text(guesses[i][j].letter, x + cellSize / 2, y + cellSize / 2);
-      } else {
+      } 
+      else {
         fill(255);
         rect(x, y, cellSize, cellSize);
       }
