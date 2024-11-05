@@ -8,10 +8,12 @@ let targetWord = ""; // Target word for the game
 let guesses = []; // Array to store guesses
 let maxAttempts = 6; // Maximum number of attempts
 let currentAttempt = 0; // Track the current attempt
+let genzWordList = [];
+let genaWordList = [];
 
 function preload(){
-  genzWordList = 
-  genaWordList = 
+  genzWordList = loadStrings("genZ");
+  genaWordList = loadStrings("genA");
 }
 
 function setup() {
@@ -89,7 +91,15 @@ function startGame(category) {
   currentAttempt = 0;
 
   // Assign target word based on chosen category
-  targetWord = category === "GenZ" ? "YEETS": "COOLY"; // Example words
+  if (category === "GenZ"){
+    targetWord = random(genzWordList).toUpperCase();
+  }
+  else if (category === "GenA"){
+    targetWord = random(genaWordList).toUpperCase();
+  }
+
+  console.log("Target word is:", targetWord); // Add this line
+  // targetWord = category === "GenZ" ? "YEETS": "COOLY"; // Example words
   
   inputField.value("");
   inputField.show();
