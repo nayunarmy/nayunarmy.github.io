@@ -29,18 +29,21 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  // createCanvas(windowWidth, windowHeight);
+  createCanvas(openPageImage.width, openPageImage.height);
 
- //BUTTONS
+  //BUTTONS
   startButton = createButton('Start');
   startButton.class('startButton');
   startButton.mouseClicked(optionPage);
 
   optionButton1 = createButton('Gen Z Slang');
+  optionButton1.class('optionButton1');
   optionButton1.position(width / 2 - 50, height / 2 + 50);
   optionButton1.mouseClicked(() => startGame("GenZ"));
 
   optionButton2 = createButton('Gen A Slang');
+  optionButton1.class('optionButton2');
   optionButton2.position(width / 2 - 50, height / 2 + 100);
   optionButton2.mouseClicked(() => startGame("GenA"));
 }
@@ -62,7 +65,8 @@ function displayPage() {
       // Canvas is wider than image
       imgHeight = height;
       imgWidth = imgHeight * imgAspect;
-    } else {
+    } 
+    else {
       // Canvas is taller than image
       imgWidth = width;
       imgHeight = imgWidth / imgAspect;
@@ -83,7 +87,7 @@ function displayPage() {
     showEndMessage("You Win!");
   }
   else if (listPage === 'lose'){
-    showEndMessage( " Tou Lose! The word was:" + targetWord)
+    showEndMessage( " Tou Lose! The word was:" + targetWord);
     
   }
 }
@@ -144,7 +148,7 @@ function keyPressed() {
     resetGame();
   }
   else if  (listPage === 'game') {
-      // Only process input if in game mode
+    // Only process input if in game mode
     if (keyCode >= 65 && keyCode <= 90 && currentGuess.length < targetWord.length) {
       // Append the key to the current guess if it's a letter
       currentGuess += key.toUpperCase();
@@ -168,7 +172,8 @@ function handleGuess() {
 
     if (guesses[currentAttempt - 1].every(cell => cell.color === 'green')) {
       listPage = 'win';
-    } else if (currentAttempt === maxAttempts) {
+    } 
+    else if (currentAttempt === maxAttempts) {
       listPage = 'lose';
     }
   }
@@ -207,7 +212,8 @@ function drawGrid() {
       // Determine color based on guess
       if (i < guesses.length && guesses[i][j]) {
         fill(guesses[i][j].color); // Fill with the color based on result
-      } else {
+      }
+      else {
         fill(255); // Default color for empty cells
       }
       
@@ -218,7 +224,8 @@ function drawGrid() {
       if (i < guesses.length && guesses[i][j]) {
         fill(0); // Set text color to black for visibility
         text(guesses[i][j].letter, x + cellSize / 2, y + cellSize / 2);
-      } else if (i === currentAttempt && j < currentGuess.length) {
+      } 
+      else if (i === currentAttempt && j < currentGuess.length) {
         fill(0); // Set text color to black for the current guess
         text(currentGuess[j], x + cellSize / 2, y + cellSize / 2);
       }
