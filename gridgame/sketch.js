@@ -18,6 +18,7 @@ let genzWordList = [];
 let genaWordList = [];
 let currentGuess = ""; 
 let openPageImage;
+let fonts;
 
 function preload(){
   //word lists
@@ -25,56 +26,46 @@ function preload(){
   genaWordList = loadStrings("genA");
 
   //background list
-  openPageImage = loadImage("openPage1.jpg");
+  openPageImage = loadImage("plainWordleBackground.jpg");
+
+  //font
+  fonts = loadFont('PinkChicken-Regular.ttf');
 }
 
 function setup() {
-  // createCanvas(windowWidth, windowHeight);
-  createCanvas(openPageImage.width, openPageImage.height);
+  createCanvas(windowWidth, windowHeight);
+  // scaleImageToCanvas();
+
 
   //BUTTONS
   startButton = createButton('Start');
   startButton.class('startButton');
   startButton.mouseClicked(optionPage);
+  startButton.position(width / 2 - 90, height / 2 + 100);
 
   optionButton1 = createButton('Gen Z Slang');
   optionButton1.class('optionButton1');
-  optionButton1.position(width / 2 - 50, height / 2 + 50);
   optionButton1.mouseClicked(() => startGame("GenZ"));
+  optionButton1.position(width / 2 - 140, height / 2 + 40);
 
   optionButton2 = createButton('Gen A Slang');
-  optionButton1.class('optionButton2');
-  optionButton2.position(width / 2 - 50, height / 2 + 100);
+  optionButton2.class('optionButton2');
+  optionButton2.position(width / 2 - 140, height / 2 + 130);
   optionButton2.mouseClicked(() => startGame("GenA"));
 }
 
 function draw() {
-  background(220);
+  background(255);
   displayPage();
 }
 
 function displayPage() {
   if (listPage === 'start') {
     background(255);
-    let imgAspect = openPageImage.width / openPageImage.height;
-    let canvasAspect = width / height;
 
-    let imgWidth, imgHeight;
+    // scaleImageToCanvas();
+    image(openPageImage, 0, 0, openPageImage.width, openPageImage.height);
 
-    if (canvasAspect > imgAspect) {
-      // Canvas is wider than image
-      imgHeight = height;
-      imgWidth = imgHeight * imgAspect;
-    } 
-    else {
-      // Canvas is taller than image
-      imgWidth = width;
-      imgHeight = imgWidth / imgAspect;
-    }
-
-    // Center the image on the canvas
-    image(openPageImage, (width - imgWidth) / 2, (height - imgHeight) / 2, imgWidth, imgHeight);
-    showStartPage();
     showStartPage();
   } 
   else if (listPage === 'optionPage') {
@@ -91,6 +82,26 @@ function displayPage() {
     
   }
 }
+
+// function scaleImageToCanvas() {
+//   // Calculate aspect ratio for scaling
+//   let imgAspect = openPageImage.width / openPageImage.height;
+//   let canvasAspect = width / height;
+
+//   let imgWidth, imgHeight;
+
+//   if (canvasAspect > imgAspect) {
+//     // Canvas is wider than the image, scale by height
+//     imgHeight = height;
+//     imgWidth = imgHeight * imgAspect;
+//   } else {
+//     // Canvas is taller than the image, scale by width
+//     imgWidth = width;
+//     imgHeight = imgWidth / imgAspect;
+//   }
+
+//   // Center the image on the canvas
+// }
 
 function showEndMessage(message){
   textSize(50);
@@ -109,9 +120,11 @@ function showStartPage() {
 }
 
 function showOptionPage() {
-  textSize(50);
+  textSize(70);
   textAlign(CENTER, CENTER);
-  text('Choose your option', width / 2, height / 2 - 100);
+  textFont(fonts);
+  fill(0);
+  text('C H O O S E    Y O U R   O P T I O N', width / 2, height / 2 - 100);
 
   startButton.hide();
   optionButton1.show();
@@ -202,12 +215,13 @@ function resetGame() {
 }
 
 function drawGrid() {
+  let padding = 10;
   textSize(32);
   textAlign(CENTER, CENTER);
   for (let i = 0; i < maxAttempts; i++) {
     for (let j = 0; j < targetWord.length; j++) {
-      let x = width / 1.85 - boardSize / 1.5 + j * cellSize;
-      let y = height / 2 - boardSize / 1.5 + i * cellSize;
+      let x = width / 1.85 - boardSize / 1.5 + j * (cellSize + padding);
+      let y = height / 2 - boardSize / 1.5 + i * (cellSize + padding);
       
       // Determine color based on guess
       if (i < guesses.length && guesses[i][j]) {
@@ -232,5 +246,3 @@ function drawGrid() {
     }
   }
 }
-
-
