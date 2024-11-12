@@ -16,6 +16,7 @@ let maxAttempts = 6;
 let currentAttempt = 0; 
 let genzWordList = [];
 let genaWordList = [];
+let normalWordList = [];
 let currentGuess = ""; 
 let openPageImage;
 let fonts;
@@ -24,6 +25,7 @@ function preload(){
   //word lists
   genzWordList = loadStrings("genZ");
   genaWordList = loadStrings("genA");
+  normalWordList = loadStrings("normal");
 
   //background list
   openPageImage = loadImage("plainWordleBackground.jpg");
@@ -50,8 +52,13 @@ function setup() {
 
   optionButton2 = createButton('Gen A Slang');
   optionButton2.class('optionButton2');
-  optionButton2.position(width / 2 - 140, height / 2 + 130);
+  optionButton2.position(width / 2 - 140, height / 2 + 170);
   optionButton2.mouseClicked(() => startGame("GenA"));
+
+  optionButton3 = createButton('normal');
+  optionButton3.class('optionButton3');
+  optionButton3.position(width / 2 -140, height / 2 + 100);
+  optionButton3.mouseClicked(() => startGame("normal"));
 }
 
 function draw() {
@@ -103,20 +110,13 @@ function displayPage() {
 //   // Center the image on the canvas
 // }
 
-function showEndMessage(message){
-  textSize(50);
-  fill(0);
-  textAlign(CENTER, CENTER);
-  text(message, width / 2, height / 2);
-  textSize(20);
-  text("Press SPACE to restart", width / 2, height / 2 + 50);
-}
 
 function showStartPage() {
   
   startButton.show();
   optionButton1.hide();
   optionButton2.hide();
+  optionButton3.hide();
 }
 
 function showOptionPage() {
@@ -125,10 +125,11 @@ function showOptionPage() {
   textFont(fonts);
   fill(0);
   text('C H O O S E    Y O U R   O P T I O N', width / 2, height / 2 - 100);
-
+  
   startButton.hide();
   optionButton1.show();
   optionButton2.show();
+  optionButton3.show();
 }
 
 function optionPage() {
@@ -139,7 +140,7 @@ function startGame(category) {
   listPage = 'game';
   guesses = []; // Reset guesses
   currentAttempt = 0;
-
+  
   // Assign target word based on chosen category
   if (category === "GenZ"){
     targetWord = random(genzWordList).toUpperCase();
@@ -147,13 +148,17 @@ function startGame(category) {
   else if (category === "GenA"){
     targetWord = random(genaWordList).toUpperCase();
   }
-
+  else if (category ==="normal"){
+    targetWord = random(normalWordList).toUpperCase();
+  }
+  
   console.log("Target word is:", targetWord); // Add this line
   // targetWord = category === "GenZ" ? "YEETS": "COOLY"; // Example words
   
-
+  
   optionButton1.hide();
   optionButton2.hide();
+  optionButton3.hide();
 }
 
 function keyPressed() {
@@ -176,13 +181,14 @@ function keyPressed() {
     }
   }
 }
+
 function handleGuess() {
   // Ensure guess is processed only if it's the right length
   if (currentGuess.length === targetWord.length) {
     guesses.push(checkGuess(currentGuess, targetWord));
     currentAttempt++;
     currentGuess = ""; // Reset current guess for next attempt
-
+    
     if (guesses[currentAttempt - 1].every(cell => cell.color === 'green')) {
       listPage = 'win';
     } 
@@ -206,12 +212,6 @@ function checkGuess(guess, target) {
     }
   }
   return result;
-}
-
-function resetGame() {
-  guesses = [];
-  currentAttempt = 0;
-  listPage = 'optionPage';
 }
 
 function drawGrid() {
@@ -245,4 +245,17 @@ function drawGrid() {
       }
     }
   }
+}
+function showEndMessage(message){
+  textSize(50);
+  fill(0);
+  textAlign(CENTER, CENTER);
+  text(message, width / 2, height / 2);
+  textSize(20);
+  text("Press SPACE to restart", width / 2, height / 2 + 50);
+}
+function resetGame() {
+  guesses = [];
+  currentAttempt = 0;
+  listPage = 'optionPage';
 }

@@ -7,7 +7,7 @@ canvas {
   display: block;
 }
 
-.startButton, .optionButton1, .optionButton2 { 
+.startButton, .optionButton1, .optionButton2, .optionButton3 { 
   background-color: #d2b4de;
   border: none;
   color: white;
@@ -22,7 +22,7 @@ canvas {
 }
 
 
-.startButton:hover, .optionButton1:hover, .optionButton2:hover {
+.startButton:hover, .optionButton1:hover, .optionButton2:hover, .optionButton3:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
   font-size: 28px;
 }
