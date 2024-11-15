@@ -2,7 +2,7 @@
 //Navya Sauhta
 //28 Oct 2024
 //
-//extra;
+//extra : integrated the code with style css
 
 
 //GLOBAL VARIABLES
@@ -27,7 +27,7 @@ function preload(){
   genaWordList = loadStrings("genA");
   normalWordList = loadStrings("normal");
 
-  //background list
+  //background 
   openPageImage = loadImage("plainWordleBackground.jpg");
 
   //font
@@ -36,14 +36,12 @@ function preload(){
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  // scaleImageToCanvas();
-
 
   //BUTTONS
   startButton = createButton('Start');
   startButton.class('startButton');
   startButton.mouseClicked(optionPage);
-  startButton.position(width / 2 - 90, height / 2 + 100);
+  startButton.position(width / 2 - 90, height / 2 );
 
   optionButton1 = createButton('Gen Z Slang');
   optionButton1.class('optionButton1');
@@ -55,7 +53,7 @@ function setup() {
   optionButton2.position(width / 2 - 140, height / 2 + 170);
   optionButton2.mouseClicked(() => startGame("GenA"));
 
-  optionButton3 = createButton('normal');
+  optionButton3 = createButton('Normal');
   optionButton3.class('optionButton3');
   optionButton3.position(width / 2 -140, height / 2 + 100);
   optionButton3.mouseClicked(() => startGame("normal"));
@@ -69,10 +67,7 @@ function draw() {
 function displayPage() {
   if (listPage === 'start') {
     background(255);
-
-    // scaleImageToCanvas();
-    image(openPageImage, 0, 0, openPageImage.width, openPageImage.height);
-
+    scaleImageToCanvas(openPageImage);
     showStartPage();
   } 
   else if (listPage === 'optionPage') {
@@ -85,31 +80,31 @@ function displayPage() {
     showEndMessage("You Win!");
   }
   else if (listPage === 'lose'){
-    showEndMessage( " Tou Lose! The word was:" + targetWord);
+    showEndMessage( " You Lose! The word was : " + targetWord);
     
   }
 }
 
-// function scaleImageToCanvas() {
-//   // Calculate aspect ratio for scaling
-//   let imgAspect = openPageImage.width / openPageImage.height;
-//   let canvasAspect = width / height;
+function scaleImageToCanvas(img) {
+  let imgAspect = img.width / img.height;
+  let canvasAspect = width / height;
 
-//   let imgWidth, imgHeight;
+  let imgWidth, imgHeight;
 
-//   if (canvasAspect > imgAspect) {
-//     // Canvas is wider than the image, scale by height
-//     imgHeight = height;
-//     imgWidth = imgHeight * imgAspect;
-//   } else {
-//     // Canvas is taller than the image, scale by width
-//     imgWidth = width;
-//     imgHeight = imgWidth / imgAspect;
-//   }
+  if (canvasAspect > imgAspect) {
+    imgHeight = height;
+    imgWidth = imgHeight * imgAspect;
+  }
+  else {
+    imgWidth = width;
+    imgHeight = imgWidth / imgAspect;
+  }
 
-//   // Center the image on the canvas
-// }
+  let offsetX = (width - imgWidth) / 2;
+  let offsetY = (height - imgHeight) / 2;
 
+  image(img, offsetX, offsetY, imgWidth, imgHeight);
+}
 
 function showStartPage() {
   
@@ -141,7 +136,7 @@ function startGame(category) {
   guesses = []; // Reset guesses
   currentAttempt = 0;
   
-  // Assign target word based on chosen category
+  // Assign targetword 
   if (category === "GenZ"){
     targetWord = random(genzWordList).toUpperCase();
   }
@@ -152,8 +147,8 @@ function startGame(category) {
     targetWord = random(normalWordList).toUpperCase();
   }
   
-  console.log("Target word is:", targetWord); // Add this line
-  // targetWord = category === "GenZ" ? "YEETS": "COOLY"; // Example words
+  console.log("Target word is:", targetWord);
+  // targetWord = category === "GenZ" ? "YEETS": "COOLY"; 
   
   
   optionButton1.hide();
@@ -166,28 +161,28 @@ function keyPressed() {
     resetGame();
   }
   else if  (listPage === 'game') {
-    // Only process input if in game mode
+    // only process if in game mode
     if (keyCode >= 65 && keyCode <= 90 && currentGuess.length < targetWord.length) {
-      // Append the key to the current guess if it's a letter
+      // add the letter
       currentGuess += key.toUpperCase();
     } 
     else if (keyCode === BACKSPACE && currentGuess.length > 0) {
-      // Remove the last letter on Backspace
+      // remove the last letter on Backspace
       currentGuess = currentGuess.slice(0, -1);
     } 
     else if (keyCode === ENTER && currentGuess.length === targetWord.length) {
-      // Handle guess submission on Enter key
+      // handle guess on Enter key
       handleGuess();
     }
   }
 }
 
 function handleGuess() {
-  // Ensure guess is processed only if it's the right length
+  // right length guesser
   if (currentGuess.length === targetWord.length) {
     guesses.push(checkGuess(currentGuess, targetWord));
     currentAttempt++;
-    currentGuess = ""; // Reset current guess for next attempt
+    currentGuess = ""; // reset guess
     
     if (guesses[currentAttempt - 1].every(cell => cell.color === 'green')) {
       listPage = 'win';
@@ -202,13 +197,13 @@ function checkGuess(guess, target) {
   let result = [];
   for (let i = 0; i < guess.length; i++) {
     if (guess[i] === target[i]) {
-      result.push({letter: guess[i], color: 'green'});
+      result.push({letter: guess[i], color: 'green'});//right letter, right place
     } 
     else if (target.includes(guess[i])) {
-      result.push({letter: guess[i], color: 'yellow'});
+      result.push({letter: guess[i], color: 'yellow'});//right letter
     } 
     else {
-      result.push({letter: guess[i], color: 'gray'});
+      result.push({letter: guess[i], color: 'gray'});//nothing right
     }
   }
   return result;
@@ -223,29 +218,29 @@ function drawGrid() {
       let x = width / 1.85 - boardSize / 1.5 + j * (cellSize + padding);
       let y = height / 2 - boardSize / 1.5 + i * (cellSize + padding);
       
-      // Determine color based on guess
+      // assign color 
       if (i < guesses.length && guesses[i][j]) {
-        fill(guesses[i][j].color); // Fill with the color based on result
+        fill(guesses[i][j].color); 
       }
       else {
-        fill(255); // Default color for empty cells
+        fill(255); // default color 
       }
       
-      // Draw the cell with the appropriate color
       rect(x, y, cellSize, cellSize);
       
-      // Draw the letter in the cell if it exists
+      // draw the letter 
       if (i < guesses.length && guesses[i][j]) {
-        fill(0); // Set text color to black for visibility
+        fill(0); // set text color to black 
         text(guesses[i][j].letter, x + cellSize / 2, y + cellSize / 2);
       } 
       else if (i === currentAttempt && j < currentGuess.length) {
-        fill(0); // Set text color to black for the current guess
+        fill(0); // set text color to black for the  guess
         text(currentGuess[j], x + cellSize / 2, y + cellSize / 2);
       }
     }
   }
 }
+
 function showEndMessage(message){
   textSize(50);
   fill(0);
@@ -254,6 +249,7 @@ function showEndMessage(message){
   textSize(20);
   text("Press SPACE to restart", width / 2, height / 2 + 50);
 }
+
 function resetGame() {
   guesses = [];
   currentAttempt = 0;
