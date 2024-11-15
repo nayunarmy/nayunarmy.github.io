@@ -9,6 +9,7 @@ canvas {
 
 .startButton, .optionButton1, .optionButton2, .optionButton3 { 
   background-color: #d2b4de;
+  width: 300px;
   border: none;
   color: white;
   padding: 10px 60px;

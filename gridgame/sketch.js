@@ -41,7 +41,7 @@ function setup() {
   startButton = createButton('Start');
   startButton.class('startButton');
   startButton.mouseClicked(optionPage);
-  startButton.position(width / 2 - 90, height / 2 );
+  startButton.position(width / 2 - 150, height / 2 - 50);
 
   optionButton1 = createButton('Gen Z Slang');
   optionButton1.class('optionButton1');
@@ -55,7 +55,7 @@ function setup() {
 
   optionButton3 = createButton('Normal');
   optionButton3.class('optionButton3');
-  optionButton3.position(width / 2 -140, height / 2 + 100);
+  optionButton3.position(width / 2 -140, height / 2 + 105);
   optionButton3.mouseClicked(() => startGame("normal"));
 }
 
