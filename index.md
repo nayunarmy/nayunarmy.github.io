@@ -15,6 +15,7 @@
 - [rectangle grid](rectanglegrid)
 - [moving character game demo](movingcharacter)
 - [grid-based game](gridgame)
+- [firework demo](fireworks)
   
 ## Projects
 - [interactive sceen](interactivesceen)
