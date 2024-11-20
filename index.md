@@ -16,6 +16,7 @@
 - [moving character game demo](movingcharacter)
 - [grid-based game](gridgame)
 - [firework demo](fireworks)
+- [nodes demo](nodes)
   
 ## Projects
 - [interactive sceen](interactivesceen)
