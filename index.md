@@ -17,7 +17,8 @@
 - [grid-based game](gridgame)
 - [firework demo](fireworks)
 - [nodes demo](nodes)
-- [library demo](libraryDemo)
+- [collide 2d](libraryDemo)
+- [local storage demo](localstorage)
   
 ## Projects
 - [interactive sceen](interactivesceen)
