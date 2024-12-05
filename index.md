@@ -19,6 +19,7 @@
 - [nodes demo](nodes)
 - [collide 2d](libraryDemo)
 - [local storage demo](localstorage)
+- [inheretance demo](oopinheritancedemo)
   
 ## Projects
 - [interactive sceen](interactivesceen)
