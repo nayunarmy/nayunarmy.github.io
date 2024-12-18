@@ -20,6 +20,8 @@
 - [collide 2d](libraryDemo)
 - [local storage demo](localstorage)
 - [inheretance demo](oopinheritancedemo)
+- [Fractal Circles](fractalcircles)
+- [ Sierpinski triangle](triangle)
   
 ## Projects
 - [interactive sceen](interactivesceen)

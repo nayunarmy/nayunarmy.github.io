@@ -5,53 +5,22 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-const TILE_SIZE = 9;
-let tileArray = [];
-
-
-function setup() {
+function setup(){
   createCanvas(windowWidth, windowHeight);
-  for(let x = 0; x < width; x += TILE_SIZE){
-    for(let y = 0; y < height; y += TILE_SIZE){
-      let someTile = spawnTile(x, y);
-      tileArray.push(someTile);
-    }
-  }
+
 }
 
+function draw(){
+  background(220);
+  rerusiveCircle(width/2, height/2, mouseX);
 
-function draw() {
-  background(220); 
-
-  //display tile
-  for (let myTile of tileArray){
-    line(myTile.x1, myTile.y1, myTile.x2, myTile.y2);
-  }
 }
 
-function spawnTile(x, y){
-  let tile;
-  let choice = random(100);
+function rerusiveCircle(x, y, radius){
+  circle(x, y, radius*2);
 
-  if (choice > 50){
-    tile = {
-      x1:x - TILE_SIZE/2,
-      y1:y - TILE_SIZE/2,
-      x2:x + TILE_SIZE/2,
-      y2:y + TILE_SIZE/2,
-    };
+  if (radius > 0){
+    rerusiveCircle(x - radius/2, y, radius/2);
+    rerusiveCircle(x + radius/2, y, radius/2);
   }
-  else{
-    tile = {
-      x1:x - TILE_SIZE/2,
-      y1:y + TILE_SIZE/2,
-      x2:x + TILE_SIZE/2,
-      y2:y - TILE_SIZE/2,
-    };
-    
-  }
-
-
-
-  return tile;
 }
